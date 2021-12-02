@@ -31,21 +31,13 @@ class FirstFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         requireActivity().contentResolver.apply {
             val uri = Uri.parse("content://com.example.contentprovider/memberbook")
             val cursor = query(uri, null, null, null, null)
             cursor?.apply {
-                var info = ""
+                var info = "Get Data from app ContentProvider\n"
                 while (moveToNext()) {
                     val tmp = "row0:" + getString(0) + " row1:" + getString(1) + " row2:" + getString(2)
                     info += tmp + "\n"
